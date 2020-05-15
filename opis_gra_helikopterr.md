@@ -3,7 +3,9 @@
 # Autor: Paweł Witowski
 
 # Krótki opis:
+
 -Do stworzenia gry użyję biblioteki "pygame"
+
 -Gra będzie polegała na sterowaniu helikopterem (za pomocą klawiszy) lecącym w jaskini i unikaniu przeszkód.
 
 -Będzie posiadała logo gdzie będziemy startowali grę.
