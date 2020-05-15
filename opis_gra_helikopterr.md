@@ -1,6 +1,6 @@
 # Tytuł projektu: Gra Helikopterr
 
-# Autor: Paweł Witowski
+# Autor: Paweł Witowski, nr_albumu: 136644
 
 # Krótki opis:
 
