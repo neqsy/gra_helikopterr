@@ -8,12 +8,12 @@ import helikopterr
 class PrzeszkodaTest(unittest.TestCase):
 
     def setUp(self):
-        self.Przeszkoda = helikopterr.Przeszkoda(x=349, szerokosc=32)
+        self.Przeszkoda = helikopterr.Przeszkoda(wspolrzedna_x=349, szerokosc=32)
 
     def test_ruch(self):
-        old_x = self.Przeszkoda.x
+        old_wspolrzedna_x = self.Przeszkoda.wspolrzedna_x
         self.Przeszkoda.ruch(5)
-        self.assertEqual(old_x - 5, self.Przeszkoda.x)
+        self.assertEqual(old_wspolrzedna_x - 5, self.Przeszkoda.wspolrzedna_x)
         self.assertEqual(self.Przeszkoda.ksztalt_gora.x, 344)
         self.assertEqual(self.Przeszkoda.ksztalt_dol.x, 344)
 
@@ -26,13 +26,14 @@ class PrzeszkodaTest(unittest.TestCase):
 class HelikopterTest(unittest.TestCase):
 
     def setUp(self):
-        self.Helikopter = helikopterr.Helikopter(x=349, y=50)
+        self.Helikopter = helikopterr.Helikopter(wspolrzedna_x=349, wspolrzedna_y=50)
 
     def test_ruch(self):
-        old_y = self.Helikopter.y
+        old_wspolrzedna_y = self.Helikopter.wspolrzedna_y
         self.Helikopter.ruch(5)
-        self.assertEqual(old_y + 5, self.Helikopter.y)
+        self.assertEqual(old_wspolrzedna_y + 5, self.Helikopter.wspolrzedna_y)
 
 
 if __name__ == '__main__':
     unittest.main()
+    
