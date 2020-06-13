@@ -36,6 +36,7 @@ def wyswietl_menu(screen):
 
 def tworzenie_obiektow():
     """Funkcja służy do tworzenia obiektów(przeszkody, bomby, helikopter, tarcze) menu w grze."""
+    
     gracz = Helikopter(270, 275)
     przeszkody = []
     bomby = []
@@ -160,6 +161,7 @@ class Colors:
 
 class Przeszkoda:
     """Klasa zawierająca właściwości i metody przeszkód."""
+    
     def __init__(self, wspolrzedna_x, SZEROKOSC):
         self.wspolrzedna_x = wspolrzedna_x
         self.szerokosc = SZEROKOSC
@@ -195,6 +197,7 @@ class Przeszkoda:
 
 class Helikopter:
     """Klasa zawierająca właściwości i metody helikoptera."""
+    
     def __init__(self, wspolrzedna_x, wspolrzedna_y):
         self.wspolrzedna_x = wspolrzedna_x
         self.wspolrzedna_y = wspolrzedna_y
@@ -218,7 +221,8 @@ class Helikopter:
 
 
 class Sprite:
-    """Klasa zawierająca właściwości i metody bomby i tarczy."""
+    """Klasa zawierająca właściwości i metody bomby oraz tarczy."""
+    
     def __init__(self, obrazek, wspolrzedna_x):
         self.wspolrzedna_x = wspolrzedna_x
         self.wspolrzedna_y = random.randint(220, 275)
