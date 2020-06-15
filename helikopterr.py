@@ -35,7 +35,7 @@ def wyswietl_menu(screen):
 
 
 def tworzenie_obiektow():
-    """Funkcja służy do tworzenia obiektów(przeszkody, bomby, helikopter, tarcze) menu w grze."""
+    """Funkcja służy do tworzenia obiektów(przeszkody, bomby, helikopter, tarcze) w grze."""
     
     gracz = Helikopter(270, 275)
     przeszkody = []
@@ -251,6 +251,7 @@ class Sprite:
 
 def main():
     pygame.init()
+    pygame.display.set_caption("Helikopterr")
     wyswietlanie_gry()
 
 
