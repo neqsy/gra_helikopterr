@@ -16,6 +16,7 @@ ROZGRYWKA = 1
 KONIEC = 2
 WYSOKOSC_TEKSTU = 20
 
+DZIELNIK = 20
 
 def napisz(tekst, x, y, rozmiar, screen):
     """Funkcja służy do umieszczania napisów w grze."""
@@ -43,11 +44,9 @@ def tworzenie_obiektow():
     tarcze = []
 
     for i in range(21):
-        przeszkody.append(Przeszkoda(i * SZEROKOSC / 20, SZEROKOSC / 20))
-    for i in range(1):
-        bomby.append(Sprite(BOMBA, i * SZEROKOSC))
-    for i in range(1):
-        tarcze.append(Sprite(TARCZA, i * SZEROKOSC))
+        przeszkody.append(Przeszkoda(i * SZEROKOSC / DZIELNIK, SZEROKOSC / DZIELNIK))
+    bomby.append(Sprite(BOMBA, SZEROKOSC))
+    tarcze.append(Sprite(TARCZA, SZEROKOSC))
 
     ruch_y = 0
     punkty = 0
@@ -67,24 +66,23 @@ def wyswietl_rozgrywka(ruch_y, punkty, gracz, przeszkody, bomby, tarcze, screen)
     for p in przeszkody:  # sprawdzam czy przeszkoda miesci sie poza ekranem
         if p.wspolrzedna_x <= -p.szerokosc:
             przeszkody.remove(p)
-            przeszkody.append((Przeszkoda(SZEROKOSC, SZEROKOSC / 20)))
+            przeszkody.append(Przeszkoda(SZEROKOSC, SZEROKOSC / DZIELNIK))
 
     for b in bomby:
         b.ruch(0.9)
         b.rysuj(screen)
         if b.kolizja(gracz.ksztalt):
             if not gracz.tarcza:
-                stan_gry = KONIEC
-                return stan_gry
+                return KONIEC
             else:
                 gracz.tarcza = False
                 bomby.remove(b)
-                bomby.append((Sprite(BOMBA, SZEROKOSC)))
+                bomby.append(Sprite(BOMBA, SZEROKOSC))
 
     for b in bomby:  # sprawdzam czy bomba miesci sie poza ekranem
         if b.wspolrzedna_x <= -b.szerokosc:
             bomby.remove(b)
-            bomby.append((Sprite(BOMBA, SZEROKOSC)))
+            bomby.append(Sprite(BOMBA, SZEROKOSC))
 
     for t in tarcze:  # rysowanie tarcz
         t.ruch(0.5)
@@ -92,19 +90,18 @@ def wyswietl_rozgrywka(ruch_y, punkty, gracz, przeszkody, bomby, tarcze, screen)
         if t.kolizja(gracz.ksztalt):
             gracz.tarcza = True
             tarcze.remove(t)
-            tarcze.append((Sprite(TARCZA, SZEROKOSC * 3)))
+            tarcze.append(Sprite(TARCZA, SZEROKOSC * 3))
 
     for t in tarcze:  # sprawdzam czy tarcza miesci sie poza ekranem
         if t.wspolrzedna_x <= -t.szerokosc:
             tarcze.remove(t)
-            tarcze.append((Sprite(TARCZA, SZEROKOSC * 3)))
+            tarcze.append(Sprite(TARCZA, SZEROKOSC * 3))
 
     gracz.rysuj(screen)
     gracz.ruch(ruch_y)  # ruch gracza (góra, dół)
 
     napisz(f"PUNKTY: {round(punkty, 2)}", 50, 50, WYSOKOSC_TEKSTU, screen)
-    stan_gry = ROZGRYWKA
-    return stan_gry
+    return ROZGRYWKA
 
 
 def wyswietl_koniec(punkty):
@@ -115,7 +112,7 @@ def wyswietl_koniec(punkty):
     screen.blit(grafika, (80, 30))
     napisz("Niestety przegrywasz", 50, 290, WYSOKOSC_TEKSTU, screen)
     napisz("Naciśnij spację, aby zagrać ponownie", 50, 350, WYSOKOSC_TEKSTU, screen)
-    napisz(f'PUNKTY: {punkty:%.2f}', 50, 320, WYSOKOSC_TEKSTU, screen)
+    napisz(f'PUNKTY: {punkty:.2f}', 50, 320, WYSOKOSC_TEKSTU, screen)
 
 
 def wyswietlanie_gry():
@@ -188,11 +185,7 @@ class Przeszkoda:
                                        int(self.szerokosc), int(self.wysokosc_dol))
 
     def kolizja(self, player):
-        if self.ksztalt_gora.colliderect(player) or self.ksztalt_dol.colliderect(player):
-
-            return True
-        else:
-            return False
+        return self.ksztalt_gora.colliderect(player) or self.ksztalt_dol.colliderect(player)
 
 
 class Helikopter:
@@ -243,12 +236,9 @@ class Sprite:
                                    int(self.szerokosc), int(self.wysokosc))
 
     def kolizja(self, player):
-        if self.ksztalt.colliderect(player):
-            return True
-        else:
-            return False
+        return self.ksztalt.colliderect(player)
 
-
+    
 def main():
     pygame.init()
     pygame.display.set_caption("Helikopterr")
