@@ -115,7 +115,7 @@ def wyswietl_koniec(punkty):
     screen.blit(grafika, (80, 30))
     napisz("Niestety przegrywasz", 50, 290, WYSOKOSC_TEKSTU, screen)
     napisz("Naciśnij spację, aby zagrać ponownie", 50, 350, WYSOKOSC_TEKSTU, screen)
-    napisz(f"Twój wynik to: {str(round(punkty, 2))}", 50, 320, WYSOKOSC_TEKSTU, screen)
+    napisz(f'PUNKTY: {punkty:%.2f}', 50, 320, WYSOKOSC_TEKSTU, screen)
 
 
 def wyswietlanie_gry():
